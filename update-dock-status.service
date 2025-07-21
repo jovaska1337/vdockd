@@ -1,7 +1,7 @@
 # update-dock-status.service - Update Thinkpad dock status from EC memory 
 [Unit]
 Description=Update Thinkpad dock status
-Wants=modprobe@ec_sys.service
+Wants=vdockd.service modprobe@ec_sys.service
 After=vdockd.service
 Before=systemd-logind.service
 
@@ -22,8 +22,6 @@ ProtectKernelLogs=yes
 ProtectKernelModules=yes
 ProtectSystem=strict
 ReadWritePaths=/run
-Restart=always
-RestartSec=0
 RestrictAddressFamilies=AF_UNIX
 RestrictNamespaces=yes
 RestrictRealtime=yes
