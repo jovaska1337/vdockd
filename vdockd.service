@@ -1,0 +1,35 @@
+# vdockd.service - Virtual Dock Daemon systemd service
+[Unit]
+Description=Virtual Dock Daemon
+Wants=modprobe@evdev.service modprobe@uinput.service
+Before=systemd-logind.service
+
+[Service]
+Type=notify
+ExecStart=@PREFIX@/bin/vdockd --daemon
+DevicePolicy=closed
+DeviceAllow=/dev/input/* wm
+DeviceAllow=/dev/uinput rw
+IPAddressDeny=any
+LockPersonality=yes
+MemoryDenyWriteExecute=yes
+NoNewPrivileges=yes
+ProtectProc=yes
+ProtectClock=yes
+ProtectControlGroups=yes
+ProtectHome=yes
+ProtectHostname=yes
+ProtectKernelLogs=yes
+ProtectKernelModules=yes
+ProtectSystem=strict
+ReadWritePaths=/run
+RestrictAddressFamilies=AF_UNIX
+RestrictNamespaces=yes
+RestrictRealtime=yes
+RestrictSUIDSGID=yes
+SystemCallArchitectures=native
+SystemCallErrorNumber=EPERM
+SystemCallFilter=@system-service
+
+[Install]
+WantedBy=multi-user.target

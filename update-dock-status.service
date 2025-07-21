@@ -1,0 +1,36 @@
+# update-dock-status.service - Update Thinkpad dock status from EC memory 
+[Unit]
+Description=Update Thinkpad dock status
+Wants=modprobe@ec_sys.service
+After=vdockd.service
+Before=systemd-logind.service
+
+[Service]
+Type=oneshot
+ExecStart=@PREFIX@/libexec/update-dock-status
+DevicePolicy=closed
+IPAddressDeny=any
+LockPersonality=yes
+MemoryDenyWriteExecute=yes
+NoNewPrivileges=yes
+ProtectProc=yes
+ProtectClock=yes
+ProtectControlGroups=yes
+ProtectHome=yes
+ProtectHostname=yes
+ProtectKernelLogs=yes
+ProtectKernelModules=yes
+ProtectSystem=strict
+ReadWritePaths=/run
+Restart=always
+RestartSec=0
+RestrictAddressFamilies=AF_UNIX
+RestrictNamespaces=yes
+RestrictRealtime=yes
+RestrictSUIDSGID=yes
+SystemCallArchitectures=native
+SystemCallErrorNumber=EPERM
+SystemCallFilter=@system-service
+
+[Install]
+WantedBy=multi-user.target

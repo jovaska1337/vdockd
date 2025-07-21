@@ -1,0 +1,9 @@
+# 70-vdockd-power-switch.rules - Virtual Dock Daemon udev rules
+
+ACTION=="remove", GOTO="end"
+
+# the virtual dock device needs to be tagged with "power-switch"
+# so that logind will listen to events emitted by it
+SUBSYSTEM=="input", KERNEL=="event*", ATTR{name}=="Virtual Dock", TAG+="power-switch"
+
+LABEL="end"

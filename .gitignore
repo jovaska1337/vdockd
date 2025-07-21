@@ -1,0 +1,9 @@
+# ignore compilation products
+*.o
+vdockd
+update-dock-status
+
+# ignore VIM files
+*~
+*.swp
+*.swo
