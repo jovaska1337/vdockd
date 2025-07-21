@@ -17,12 +17,13 @@ install: all
 		$(PREFIX)/lib/systemd/system \
 		$(PREFIX)/bin $(PREFIX)/libexec \
 		/etc/acpi/events
-	cp -v acpid/* /etc/acpi/events
 	cp -v vdockd $(PREFIX)/bin
 	cp -v update-dock-status $(PREFIX)/libexec
 	cp -v 70-vdockd-power-switch.rules $(PREFIX)/lib/udev/rules.d
 	sed 's|@PREFIX@|$(PREFIX)|g' vdockd.service > $(PREFIX)/lib/systemd/system/vdockd.service
 	sed 's|@PREFIX@|$(PREFIX)|g' update-dock-status.service > $(PREFIX)/lib/systemd/system/update-dock-status.service
+	sed 's|@PREFIX@|$(PREFIX)|g' acpid/dock > /etc/acpi/events/dock
+	sed 's|@PREFIX@|$(PREFIX)|g' acpid/undock > /etc/acpi/events/undock
 
 .PHONY: clean
 clean:

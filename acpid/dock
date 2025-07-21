@@ -1,2 +1,2 @@
 event=ibm/hotkey LEN0068:00 00000080 00004010
-action=/usr/local/bin/vdockd DOCK
+action=@PREFIX@/bin/vdockd DOCK
