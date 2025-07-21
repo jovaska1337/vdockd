@@ -38,12 +38,17 @@ int main()
 	}
 
 	if (rv != sizeof(ec_mem)) {
-		fprintf(stderr, "WARNING: Expected %d bytes of EC memory, got %d!\n", (int)sizeof(ec_mem), rv);
+		fprintf(stderr, "WARNING: Expected %d bytes of EC memory, got %d!\n",
+			(int)sizeof(ec_mem), rv);
 	}
 
-	char *const argv[] = { "vdockd", ec_mem[DOCKED_BYTE] & (1 << DOCKED_BIT) ? "DOCK" : "UNDOCK" };
-	execv(argv[0], argv);
-	PrintError("execv()");
+	char *const argv[] = {
+		"vdockd",
+		ec_mem[DOCKED_BYTE] & (1 << DOCKED_BIT) ? "DOCK" : "UNDOCK",
+		NULL
+	};
+	execvp(argv[0], argv);
+	PrintError("execvp()");
 
 	return 1;
 }
