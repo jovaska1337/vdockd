@@ -31,9 +31,11 @@ clean:
 
 vdockd: vdockd.o
 	$(CC) $(LDFLAGS) $(LDFLAGS_LIBS) -o $@ $^
+	$(STRIP) -s $@
 
 update-dock-status: update-dock-status.o 
 	$(CC) $(LDFLAGS) -o $@ $^
+	$(STRIP) -s $@
 
 %.o : %.c
 	$(CC) -c $(CFLAGS) $(CFLAGS_LIBS) -o $@ $^
